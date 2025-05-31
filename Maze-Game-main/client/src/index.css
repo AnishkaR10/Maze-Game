@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 40% 92%; /* #E8F0F7 - Light blue gray */
+  --foreground: 220 50% 15%; /* #0F1419 - Dark blue */
+  --muted: 210 30% 82%; /* #C8D4E0 */
+  --muted-foreground: 220 25% 35%; /* #525B66 */
+  --popover: 200 40% 95%; /* #F0F7FF */
+  --popover-foreground: 220 50% 15%; /* #0F1419 */
+  --card: 0 0% 100%; /* #FFFFFF - Pure white cards */
+  --card-foreground: 220 50% 15%; /* #0F1419 */
+  --border: 210 25% 70%; /* #9BAAC2 */
+  --input: 210 30% 96%; /* #F4F8FC */
+  --primary: 220 70% 45%; /* #2563EB - Blue */
+  --primary-foreground: 0 0% 100%; /* #FFFFFF */
+  --secondary: 350 60% 55%; /* #E53E3E - Red */
+  --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+  --accent: 160 50% 45%; /* #38A169 - Green */
+  --accent-foreground: 0 0% 100%; /* #FFFFFF */
+  --destructive: 0 70% 55%; /* #E53E3E */
+  --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+  --ring: 220 70% 45%; /* #2563EB */
+  --radius: 8px;
+
+  /* Game colors - Bright and cohesive */
+  --game-blue: 217 91% 60%; /* #3B82F6 */
+  --game-green: 142 76% 36%; /* #10B981 */
+  --game-orange: 25 95% 53%; /* #F59E0B */
+  --game-purple: 262 83% 58%; /* #8B5CF6 */
+  --game-pink: 328 86% 70%; /* #EC4899 */
+  --game-teal: 173 58% 39%; /* #14B8A6 */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Orbitron', monospace;
+  }
+
+  canvas {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+}
+
+@layer components {
+  .game-button {
+    @apply relative overflow-hidden border-2 rounded-lg transition-all duration-300 font-bold text-sm;
+    background: hsl(var(--card));
+    border-color: hsl(var(--border));
+    box-shadow: 0 4px 0 hsl(var(--border));
+    image-rendering: pixelated;
+  }
+
+  .game-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 hsl(var(--border));
+  }
+
+  .game-button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 hsl(var(--border));
+  }
+
+  .game-button.start {
+    background: hsl(var(--game-orange));
+    border-color: hsl(var(--game-orange) / 0.7);
+    color: white;
+  }
+
+  .game-button.end {
+    background: hsl(var(--game-blue));
+    border-color: hsl(var(--game-blue) / 0.7);
+    color: white;
+  }
+
+  .game-button.wall {
+    background: hsl(var(--game-purple));
+    border-color: hsl(var(--game-purple) / 0.7);
+    color: white;
+  }
+
+  .game-button.erase {
+    background: hsl(var(--game-pink));
+    border-color: hsl(var(--game-pink) / 0.7);
+    color: white;
+  }
+
+  .game-button.primary {
+    background: hsl(var(--game-blue));
+    border-color: hsl(var(--game-blue) / 0.7);
+    color: white;
+  }
+
+  .game-button.secondary {
+    background: hsl(var(--game-pink));
+    border-color: hsl(var(--game-pink) / 0.7);
+    color: white;
+  }
+
+  .game-button.accent {
+    background: hsl(var(--game-green));
+    border-color: hsl(var(--game-green) / 0.7);
+    color: white;
+  }
+
+  .game-button.teal {
+    background: hsl(var(--game-teal));
+    border-color: hsl(var(--game-teal) / 0.7);
+    color: white;
+  }
+
+  .floating-card {
+    @apply relative;
+    background: hsl(var(--card));
+    border: 2px solid hsl(var(--border));
+    border-radius: 12px;
+    box-shadow: 0 8px 0 hsl(var(--border)), 
+                0 12px 24px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .floating-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 0 hsl(var(--border)), 
+                0 16px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  .maze-canvas {
+    border: 4px solid hsl(var(--border));
+    box-shadow: 0 8px 0 hsl(var(--border));
+    background: white;
+    border-radius: 8px;
+  }
+
+  .pixelated-text {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    image-rendering: pixelated;
+    text-rendering: optimizeSpeed;
+  }
+
+  .grid-background {
+    background-image: 
+      linear-gradient(hsl(var(--border) / 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .status-indicator {
+    @apply w-3 h-3 rounded-full mr-2 inline-block;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .floating-elements {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .floating-element {
+    position: absolute;
+    opacity: 0.3;
+  }
+}
