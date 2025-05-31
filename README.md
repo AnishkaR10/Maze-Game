@@ -46,7 +46,7 @@ The A* algorithm is a popular pathfinding algorithm used in games and AI. It fin
 
 ### 1. Clone the repository:
 ```bash
-git clone https://github.com/SPareshKumar/Maze-Game.git
+git clone https://github.com/AnishkaR10/Maze-Game.git
 cd Maze-Game
 ```
 
